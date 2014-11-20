@@ -7,6 +7,7 @@ import json
 import os
 
 class IdentifiantsManquants(Exception):
+    "Exception levee quand l'utilsateur n'a pas set les variables d'env"
     pass
 
 if 'CHRIS_LOGIN' not in os.environ or 'CHRIS_PASSWORD' not in os.environ:
@@ -23,11 +24,15 @@ class FormDataFactory(object):
         self.keyword = keyword
 
     @property
-    def template(self):
+    def partial_template(self):
+        "Template partielle avec rows et keyword constantes"
+
         return self.template.format(rows=self.rows, keyword=self.keyword)
 
     def generate_by_page(self, page):
-        raw = self.template.format(page=page)
+        "Generation de formdata pour la n-eme page de resultat"
+        
+        raw = self.partial_template.format(page=page)
         return dict(urlparse.parse_qsl(raw))
 
 
@@ -37,6 +42,8 @@ class ChrisSpider(scrapy.Spider):
     factory = FormDataFactory(rows=250, keyword='finance')
 
     def parse(self, response):
+        "Identification sur la page de login"
+
         return scrapy.FormRequest.from_response(
         response,
         formdata={'userName': LOGIN, 'password': PASSWORD, 'nxtPg': '/blogs/search/'},
@@ -44,6 +51,8 @@ class ChrisSpider(scrapy.Spider):
     )
 
     def search_page(self, page=1):
+        "Demande les resultats de la n-eme page de recherche"
+
         return scrapy.FormRequest(
         url='http://app.grouphigh.com/blogs/david-search-data/',
         formdata=self.factory.generate_by_page(page=page),
@@ -51,9 +60,13 @@ class ChrisSpider(scrapy.Spider):
     )
 
     def search(self, response):
+        "Apres le login, on lance la recherche"
+
         return self.search_page()
 
     def extract(self, response):
+        "Extraction des donnees"
+
         json_data = json.loads(response.body)
         current_page = int(json_data['page'])
         total_pages = int(json_data['total'])
