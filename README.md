@@ -13,7 +13,7 @@ $ crapy crawl chris -o email.json
 
 Cela créera un fichier email.json contenant les emails.
 
-Il crawle toutes les adresses email à partir du mot clé 'finance'. Pour changer de mot clé, il suffit de changer la ligne:
+Il crawle toutes les adresses email à partir du mot-clé 'finance'. Pour changer de mot-clé, il suffit de changer la ligne:
 ```python
 factory = FormDataFactory(rows=250, keyword='finance')
 ```
