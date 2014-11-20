@@ -43,7 +43,7 @@ class ChrisSpider(scrapy.Spider):
         callback=self.search
     )
 
-    def search_page(self, page=722):
+    def search_page(self, page=1):
         return scrapy.FormRequest(
         url='http://app.grouphigh.com/blogs/david-search-data/',
         formdata=self.factory.generate_by_page(page=page),
