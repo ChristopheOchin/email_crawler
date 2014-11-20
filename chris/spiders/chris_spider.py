@@ -31,7 +31,7 @@ class FormDataFactory(object):
 
     def generate_by_page(self, page):
         "Generation de formdata pour la n-eme page de resultat"
-        
+
         raw = self.partial_template.format(page=page)
         return dict(urlparse.parse_qsl(raw))
 
@@ -76,7 +76,7 @@ class ChrisSpider(scrapy.Spider):
             print 'THE END'
             print '--------------------------------'
             return
-        for row in rows:
+        for row in json_data['rows']:
             emails = row['cell'].get('blog_emails', [])
             for email in emails:
                 item = ChrisItem()
