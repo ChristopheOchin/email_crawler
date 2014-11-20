@@ -17,3 +17,5 @@ Il crawle toutes les adresses email à partir du mot-clé 'finance'. Pour change
 ```python
 factory = FormDataFactory(rows=250, keyword='finance')
 ```
+
+du fichier chris/spiders/chris_spider.py
