@@ -8,7 +8,7 @@ Pour commencer à crawler:
 $ pip install -r requirements.txt
 $ export CHRIS_LOGIN=votre-login
 $ export CHRIS_PASSWORD=votre-mot-de-passe
-$ crapy crawl chris -o email.json
+$ scrapy crawl chris -o email.json
 ```
 
 Cela créera un fichier email.json contenant les emails.
