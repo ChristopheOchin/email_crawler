@@ -10,3 +10,5 @@ import scrapy
 
 class ChrisItem(scrapy.Item):
     email = scrapy.Field()
+    blog_address = scrapy.Field()
+    mozrank = scrapy.Field()

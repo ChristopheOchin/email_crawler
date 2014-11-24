@@ -81,6 +81,8 @@ class ChrisSpider(scrapy.Spider):
             for email in emails:
                 item = ChrisItem()
                 item['email'] = email
+                item['blog_address'] = row['cell'].get('blog_blogLink', '')
+                item['mozrank'] = row['cell'].get('blog_seo_umrp', '')
                 yield item
         print '--------------------------------'
         print 'Current page {}, total page: {}'.format(current_page, total_pages)
