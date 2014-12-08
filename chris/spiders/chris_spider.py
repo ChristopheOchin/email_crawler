@@ -83,6 +83,11 @@ class ChrisSpider(scrapy.Spider):
                 item['email'] = email
                 item['blog_address'] = row['cell'].get('blog_blogLink', '')
                 item['mozrank'] = row['cell'].get('blog_seo_umrp', '')
+                item['twitter'] = row['cell'].get('blog_twitter_followers', '')
+                item['facebook'] = row['cell'].get('blog_facebook_likes', '')
+                item['pinterest'] = row['cell'].get('blog_pinterest_followers', '')
+                item['instagram'] = row['cell'].get('blog_instagram_follows', '')
+                item['youtube'] = row['cell'].get('blog_youtube_subscribers', '')
                 yield item
         print '--------------------------------'
         print 'Current page {}, total page: {}'.format(current_page, total_pages)
